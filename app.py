@@ -3,7 +3,7 @@ import gradio as gr
 demo = gr.Blocks()
 
 with demo:
-    inp = gr.Textbox(placeholder="Enter text.")
+    inp = gr.Textbox(placeholder="Enter URL only.")
     scroll_btn = gr.Button("Scroll")
     no_scroll_btn = gr.Button("No Scroll")
     big_block = gr.HTML("""
