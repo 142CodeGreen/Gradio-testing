@@ -1,23 +1,31 @@
 import gradio as gr
 
-demo = gr.Blocks()
+# Define a function to handle the Q&A
+def qa_handler(question, file, url):
+    # For demonstration, we'll just return the question as the answer
+    # In a real application, you would process the question, file, and URL to generate a response
+    return f"Answer: {question}"
 
-with demo:
-    inp = gr.Textbox(placeholder="Enter URL only.")
-    scroll_btn = gr.Button("Scroll")
-    no_scroll_btn = gr.Button("No Scroll")
-    big_block = gr.HTML("""
-    <div style='height: 800px; width: 100px; background-color: pink;'></div>
-    """)
-    out = gr.Textbox()
+# Create a Gradio Blocks app
+with gr.Blocks() as demo:
+    # Textbox for user to input a question
+    question = gr.Textbox(placeholder="Enter your question here.")
+    # File uploader for user to upload files
+    file_uploader = gr.File(label="Upload a file")
+    # Textbox for user to input a URL
+    url_input = gr.Textbox(placeholder="Enter a URL here.")
+    # Chatbot to display the Q&A
+    chatbot = gr.Chatbot(type="messages")
+    # Button to submit the question
+    submit_btn = gr.Button("Submit")
 
-    scroll_btn.click(lambda x: x,
-               inputs=inp,
-               outputs=out,
-                scroll_to_output=True)
-    no_scroll_btn.click(lambda x: x,
-               inputs=inp,
-               outputs=out)
+    # Event listener for the "Submit" button
+    submit_btn.click(
+        qa_handler,
+        inputs=[question, file_uploader, url_input],
+        outputs=chatbot
+    )
 
+# Launch the Gradio app
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(show_error=True)
