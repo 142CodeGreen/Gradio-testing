@@ -8,12 +8,13 @@ def qa_handler(question, file, url):
 
 # Create a Gradio Blocks app
 with gr.Blocks() as demo:
-    # Textbox for user to input a question
-    question = gr.Textbox(placeholder="Enter your question here.")
     # File uploader for user to upload files
     file_uploader = gr.File(label="Upload a file")
     # Textbox for user to input a URL
     url_input = gr.Textbox(placeholder="Enter a URL here.")
+
+    # Textbox for user to input a question
+    question = gr.Textbox(placeholder="Enter your question here.")
     # Chatbot to display the Q&A
     chatbot = gr.Chatbot(type="messages")
     # Button to submit the question
